@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/hooks/hooks";
 import type { RootState } from "@/store";
 import { loginUser, resetLoginState } from "@/store/auth/login-slice";
 import { initialValuesForLogin, LoginInputFields } from "@/data/auth.form-data";
+import antdBugImg from "@/assets/bug-img.png";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -28,28 +29,24 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-gray-50">
-      {/* LEFT IMAGE SECTION */}
-      <div className="hidden md:flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700">
-        <div className="max-w-md text-white px-10">
-          <h1 className="text-4xl font-bold mb-4">Welcome back </h1>
+    <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-[#F6F7F8]">
+      {/* LEFT BRAND SECTION */}
+      <div className="hidden md:flex items-center justify-center bg-[#f57243]">
+        <div className="max-w-md px-10 text-white">
+          <h1 className="text-4xl font-bold mb-4">Welcome back</h1>
           <p className="text-lg opacity-90 leading-relaxed">
             Log in to manage vulnerabilities, track reports, and collaborate securely on your Bug Bounty platform.
           </p>
 
-          <img
-            src="https://illustrations.popsy.co/white/security.svg"
-            alt="Security Illustration"
-            className="mt-10 w-full"
-          />
+          <img src={antdBugImg} alt="Bug bounty illustration" className="mt-10 w-full" />
         </div>
       </div>
 
       {/* RIGHT FORM SECTION */}
       <div className="flex items-center justify-center px-4 sm:px-6">
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="text-2xl font-semibold text-gray-900">Login</h2>
-          <p className="text-gray-500 mb-6">Continue to BugBounty</p>
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-md border border-[#EDEFF1] p-8">
+          <h2 className="text-2xl font-semibold text-[#1A1A1B]">Login</h2>
+          <p className="text-[#7C7C7C] mb-6">Continue to BugBounty</p>
 
           <Form layout="vertical" initialValues={initialValuesForLogin} onFinish={onFinish} disabled={isLoading}>
             {LoginInputFields.map((field) => (
@@ -63,20 +60,24 @@ const LoginPage = () => {
             ))}
 
             <Button
-              type="primary"
               htmlType="submit"
               size="large"
               loading={isLoading}
               block
-              className="bg-blue-600 hover:bg-blue-700"
+              style={{
+                backgroundColor: "#FF4500",
+                borderColor: "#FF4500",
+                color: "#fff",
+                fontWeight: 600,
+              }}
             >
               Login
             </Button>
           </Form>
 
-          <p className="text-sm mt-6 text-center text-gray-600">
+          <p className="text-sm mt-6 text-center text-[#7C7C7C]">
             Don’t have an account?{" "}
-            <Link to="/register" className="text-blue-600 font-medium">
+            <Link to="/register" className="font-medium" style={{ color: "#FF4500" }}>
               Register
             </Link>
           </p>

@@ -56,6 +56,23 @@ const SubmitSolutionPage = () => {
             label="Attachments (optional)"
             name="attachments"
             valuePropName="fileList"
+            getValueFromEvent={(e) => e?.fileList}
+          >
+            <Upload
+              beforeUpload={() => false}
+              multiple
+            >
+              <Button icon={<UploadOutlined />}>
+                Upload files (Image / PDF / ZIP)
+              </Button>
+            </Upload>
+          </Form.Item>
+
+
+          {/* <Form.Item
+            label="Attachments (optional)"
+            name="attachments"
+            valuePropName="fileList"
             getValueFromEvent={(e) => e}
           >
             <Upload
@@ -64,7 +81,7 @@ const SubmitSolutionPage = () => {
             >
               <Button icon={<UploadOutlined />}>Upload files (Image / PDF / ZIP)</Button>
             </Upload>
-          </Form.Item>
+          </Form.Item> */}
 
           <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
             Submit Solution

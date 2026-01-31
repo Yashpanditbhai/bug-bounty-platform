@@ -6,7 +6,7 @@ import { initialValuesForRegister, RegisterInputFields } from "@/data/auth.form-
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import { useEffect } from "react";
-import antdBugImg from "@/assets/ant-bug.jpg";
+import antdBugImg from "@/assets/bug-img.png";
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -29,9 +29,9 @@ const RegisterPage = () => {
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-[#F6F7F8]">
       {/* LEFT BRAND SECTION */}
-      <div className="hidden md:flex items-center justify-center bg-[#FF4500]">
+      <div className="hidden md:flex items-center justify-center bg-[#f57243]">
         <div className="max-w-md px-10 text-white">
-          <h1 className="text-4xl font-bold mb-4">Join the community 🚀</h1>
+          <h1 className="text-4xl font-bold mb-4">Join the community </h1>
           <p className="text-lg opacity-90 leading-relaxed">
             Create your account to report vulnerabilities, collaborate with organizations, and earn rewards through
             responsible disclosure.
