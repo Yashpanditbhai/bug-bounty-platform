@@ -2,6 +2,7 @@ import Bug from "../models/Bug.model.js";
 import { generateCode } from "../utils/codeGenerator.js";
 import { successResponse, errorResponse } from "../utils/response.dto.js";
 import User from "../models/User.model.js";
+import Submission from "../models/Submission.model.js";
 
 export const createBug = async (req, res) => {
   try {
@@ -58,7 +59,6 @@ export const getAllBugs = async (req, res) => {
   }
 };
 
-
 export const getBugByCode = async (req, res) => {
   try {
     const { bugCode } = req.params;
@@ -76,6 +76,27 @@ export const getBugByCode = async (req, res) => {
     };
 
     return successResponse(res, "Bug fetched", response);
+  } catch (e) {
+    return errorResponse(res, e.message);
+  }
+};
+
+export const updateBugStatus = async (req, res) => {
+  try {
+    const { bugCode } = req.params;
+    const { status } = req.body;
+
+    const bug = await Bug.findOne({ bugCode });
+    if (!bug) return errorResponse(res, "Bug not found", 404);
+
+    if (bug.createdBy !== req.user.userCode) {
+      return errorResponse(res, "Not allowed", 403);
+    }
+
+    bug.status = status; // Open | In Review | Closed
+    await bug.save();
+
+    return successResponse(res, "Bug status updated", bug);
   } catch (e) {
     return errorResponse(res, e.message);
   }

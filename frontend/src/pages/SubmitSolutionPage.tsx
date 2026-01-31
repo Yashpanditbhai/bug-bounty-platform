@@ -58,34 +58,27 @@ const SubmitSolutionPage = () => {
             valuePropName="fileList"
             getValueFromEvent={(e) => e?.fileList}
           >
-            <Upload
-              beforeUpload={() => false}
-              multiple
-            >
-              <Button icon={<UploadOutlined />}>
-                Upload files (Image / PDF / ZIP)
-              </Button>
+            <Upload beforeUpload={() => false} multiple>
+              <Button icon={<UploadOutlined />}>Upload files (Image / PDF / ZIP)</Button>
             </Upload>
           </Form.Item>
 
-
-          {/* <Form.Item
-            label="Attachments (optional)"
-            name="attachments"
-            valuePropName="fileList"
-            getValueFromEvent={(e) => e}
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+            disabled={isLoading}
+            className="!bg-[#ff8b32dd] cursor-pointer"
           >
-            <Upload
-              beforeUpload={() => false} // prevent auto upload
-              multiple
-            >
-              <Button icon={<UploadOutlined />}>Upload files (Image / PDF / ZIP)</Button>
-            </Upload>
-          </Form.Item> */}
-
-          <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
             Submit Solution
           </Button>
+
+          {/* <button
+            onClick={() => navigate(`/bugs/${bug.bugCode}/submit`)}
+            className="px-4 py-1.5 rounded-lg font-medium text-white bg-[#FF4500] hover:opacity-90 transition"
+          >
+            Submit Solution
+          </button> */}
         </Form>
       </div>
     </div>

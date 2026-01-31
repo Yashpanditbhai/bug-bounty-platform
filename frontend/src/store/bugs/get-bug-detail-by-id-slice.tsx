@@ -10,6 +10,7 @@ export interface BugDetails {
   bounty: number;
   status: "Open" | "In Review" | "Closed";
   attachments: any;
+  hasSubmitted?: any;
   createdBy: {
     userCode: string;
     name: string;

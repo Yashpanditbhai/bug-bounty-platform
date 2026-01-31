@@ -126,10 +126,10 @@ export const submitSolution = async (req, res) => {
     });
 
     // 5️⃣ Move bug to "In Review" (first submission only)
-    if (bug.status === "Open") {
-      bug.status = "In Review";
-      await bug.save();
-    }
+    // if (bug.status === "Open") {
+    //   bug.status = "In Review";
+    //   await bug.save();
+    // }
 
     return successResponse(res, "Solution submitted", submission, 201);
   } catch (e) {
@@ -180,6 +180,7 @@ export const getSubmissionsByBug = async (req, res) => {
     const { bugCode } = req.params;
 
     const submissions = await Submission.find({ bugCode });
+
     // collect userCodes
     const userCodes = submissions.map((s) => s.submittedBy);
 
@@ -199,7 +200,7 @@ export const getSubmissionsByBug = async (req, res) => {
       },
     }));
 
-    return successResponse(res, "Submissions fetched", submissions);
+    return successResponse(res, "Submissions fetched", response);
   } catch (e) {
     return errorResponse(res, e.message);
   }

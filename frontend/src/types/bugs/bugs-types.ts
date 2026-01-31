@@ -17,3 +17,6 @@ export interface Bug {
   submissionsCount?: number;
   attachments?: string[];
 }
+
+
+
