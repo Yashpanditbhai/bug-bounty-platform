@@ -9,6 +9,49 @@ import BugDetailsPage from "@/pages/BugDetailsPage";
 import ProtectedRoute from "@/routes/PrivateRoute";
 import SubmitSolutionPage from "@/pages/SubmitSolutionPage";
 
+// const routes = [
+//   // ---------- PUBLIC ROUTES ----------
+//   {
+//     path: "/login",
+//     element: <LoginPage />,
+//   },
+//   {
+//     path: "/register",
+//     element: <RegisterPage />,
+//   },
+
+//   {
+//     path: "/",
+//     element: <RootLayout />,
+//     children: [
+//       {
+//         index: true,
+//         element: <DashboardPage />,
+//       },
+
+//       {
+//         path: "bugs/:bugCode",
+//         element: <BugDetailsPage />,
+//       },
+
+//       {
+//         element: <ProtectedRoute />,
+//         children: [
+//           {
+//             path: "create-bug",
+//             element: <CreateBugPage />,
+//           },
+//           {
+//             path: "bugs/:bugCode/submit",
+//             element: <SubmitSolutionPage />,
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ];
+
+
 const routes = [
   // ---------- PUBLIC ROUTES ----------
   {
@@ -20,27 +63,26 @@ const routes = [
     element: <RegisterPage />,
   },
 
+  // ---------- PROTECTED APP ----------
   {
-    path: "/",
-    element: <RootLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <DashboardPage />,
-      },
-
-      {
-        path: "bugs/:bugCode",
-        element: <BugDetailsPage />,
-      },
-
-      {
-        element: <ProtectedRoute />,
+        path: "/",
+        element: <RootLayout />,
         children: [
           {
-            path: "create-bug",
-            element: <CreateBugPage />,
+            index: true,
+            element: <DashboardPage />,
           },
+          {
+            path: "bugs/:bugCode",
+            element: <BugDetailsPage />,
+          },
+          // {
+          //   path: "create-bug",
+          //   element: <CreateBugPage />,
+          // },
           {
             path: "bugs/:bugCode/submit",
             element: <SubmitSolutionPage />,
@@ -50,5 +92,6 @@ const routes = [
     ],
   },
 ];
+
 
 export default routes;

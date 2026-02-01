@@ -78,29 +78,6 @@ export const createBug = async (req, res) => {
   }
 };
 
-// export const getAllBugs = async (req, res) => {
-//   try {
-//     const bugs = await Bug.find();
-
-//     const users = await User.find(
-//       { userCode: { $in: bugs.map((b) => b.createdBy) } },
-//       { userCode: 1, name: 1, _id: 0 },
-//     );
-
-//     const userMap = {};
-//     users.forEach((u) => (userMap[u.userCode] = u));
-
-//     const response = bugs.map((bug) => ({
-//       ...bug.toObject(),
-//       createdBy: userMap[bug.createdBy] || null,
-//     }));
-
-//     return successResponse(res, "Bugs fetched", response);
-//   } catch (e) {
-//     return errorResponse(res, e.message);
-//   }
-// };
-
 export const getBugByCode = async (req, res) => {
   try {
     const { bugCode } = req.params;

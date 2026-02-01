@@ -14,7 +14,7 @@ const DashboardPage = () => {
 
   const { showPostBugModal } = useSelector((state: RootState) => state.ui);
   const { bugs, isLoading, error } = useSelector((state: RootState) => state.getAllBugs);
-
+  const { user } = useSelector((state: RootState) => state.getLoggedInUser);
   const { isSuccess: isBugCreated } = useSelector((state: RootState) => state.addBug);
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
@@ -38,15 +38,21 @@ const DashboardPage = () => {
   return (
     <div className="mx-auto">
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-semibold text-gray-900">All Bugs</h1>
 
-        <button
-          onClick={handlePostBug}
-          className="px-4 py-1.5 rounded-lg font-medium text-white bg-[#FF4500] hover:opacity-90 transition"
-        >
-          Post Bug
-        </button>
+      {/* HEADER */}
+      <div className="mb-6">
+        {/* TOP ROW */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold text-gray-900">All Bugs</h1>
+
+          <button
+            onClick={handlePostBug}
+            className="px-4 py-2 rounded-lg font-medium text-white bg-[#FF4500] hover:opacity-90 transition"
+          >
+            Post Bug
+          </button>
+        </div>
+       
       </div>
 
       {/* MODAL */}
