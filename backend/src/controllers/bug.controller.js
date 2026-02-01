@@ -4,6 +4,48 @@ import { successResponse, errorResponse } from "../utils/response.dto.js";
 import User from "../models/User.model.js";
 import Submission from "../models/Submission.model.js";
 
+export const getAllBugs = async (req, res) => {
+  try {
+    const bugs = await Bug.find();
+
+    // fetch creators
+    const users = await User.find(
+      { userCode: { $in: bugs.map((b) => b.createdBy) } },
+      { userCode: 1, name: 1, _id: 0 },
+    );
+
+    const userMap = {};
+    users.forEach((u) => {
+      userMap[u.userCode] = u;
+    });
+
+    // 🔥 fetch submission counts
+    const submissionCounts = await Submission.aggregate([
+      {
+        $group: {
+          _id: "$bugCode",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    const submissionCountMap = {};
+    submissionCounts.forEach((s) => {
+      submissionCountMap[s._id] = s.count;
+    });
+
+    const response = bugs.map((bug) => ({
+      ...bug.toObject(),
+      createdBy: userMap[bug.createdBy] || null,
+      submissionsCount: submissionCountMap[bug.bugCode] || 0,
+    }));
+
+    return successResponse(res, "Bugs fetched", response);
+  } catch (e) {
+    return errorResponse(res, e.message);
+  }
+};
+
 export const createBug = async (req, res) => {
   try {
     const bugCode = await generateCode(Bug, "BUG");
@@ -36,28 +78,28 @@ export const createBug = async (req, res) => {
   }
 };
 
-export const getAllBugs = async (req, res) => {
-  try {
-    const bugs = await Bug.find();
+// export const getAllBugs = async (req, res) => {
+//   try {
+//     const bugs = await Bug.find();
 
-    const users = await User.find(
-      { userCode: { $in: bugs.map((b) => b.createdBy) } },
-      { userCode: 1, name: 1, _id: 0 },
-    );
+//     const users = await User.find(
+//       { userCode: { $in: bugs.map((b) => b.createdBy) } },
+//       { userCode: 1, name: 1, _id: 0 },
+//     );
 
-    const userMap = {};
-    users.forEach((u) => (userMap[u.userCode] = u));
+//     const userMap = {};
+//     users.forEach((u) => (userMap[u.userCode] = u));
 
-    const response = bugs.map((bug) => ({
-      ...bug.toObject(),
-      createdBy: userMap[bug.createdBy] || null,
-    }));
+//     const response = bugs.map((bug) => ({
+//       ...bug.toObject(),
+//       createdBy: userMap[bug.createdBy] || null,
+//     }));
 
-    return successResponse(res, "Bugs fetched", response);
-  } catch (e) {
-    return errorResponse(res, e.message);
-  }
-};
+//     return successResponse(res, "Bugs fetched", response);
+//   } catch (e) {
+//     return errorResponse(res, e.message);
+//   }
+// };
 
 export const getBugByCode = async (req, res) => {
   try {

@@ -43,14 +43,21 @@ const submissionSchema = new mongoose.Schema({
     required: true,
   },
 
+  // attachments: [
+  //   {
+  //     url: String,
+  //     type: String,
+  //     name: String,
+  //   },
+  // ],
   attachments: [
-    {
-      url: String,
-      type: String,
-      name: String,
-    },
-  ],
-
+  {
+    url: { type: String, required: true },
+    type: { type: String }, // image | pdf | video
+    name: { type: String }
+  }
+]
+,
   approved: { type: Boolean, default: false },
 });
 

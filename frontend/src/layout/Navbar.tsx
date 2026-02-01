@@ -37,7 +37,7 @@ const Navbar = () => {
               to="/create-bug"
               className="font-medium text-[#1A1A1B] hover:text-[#FF4500] transition"
             >
-              Create Bug
+              Post Bug
             </Link>
           )}
 
